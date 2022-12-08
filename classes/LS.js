@@ -1,7 +1,7 @@
 class LS{
     constructor(){
         this.city;
-        this.defaultCity = 'Tõrvandi';
+        this.defaultCity = 'Radeberg';
     }
 
     getLocationData(){
