@@ -1,14 +1,31 @@
-// Weather object
-const weather = new Weather('Tallinn')
-// UI object
+// Elements
+const ls = new LS()
+const weatherLocation = ls.getLocationData()
+const weather = new Weather(weatherLocation)
 const ui = new UI()
 
-// get city weather
+document.addEventListener('DOMContentLoaded', getWeather)
+
+// Change city
+const form = document.querySelector('#change-city')
+form.addEventListener('submit', changeCityWeather)
+
+function changeCityWeather(event){
+    const city = document.querySelector('#city-name').value
+    weather.changeCity(city)
+    ls.setLocationData(city)
+    getWeather()
+    document.querySelector('#city-name').value = ''
+    event.preventDefault()
+}
+
+// Get weather data
 function getWeather(){
     weather.getWeather()
-        .then(data => {
-            console.log(data)
+        .then(data =>{
             ui.drawWeather(data)
         })
-        .catch(error => console.log(error))
+        .catch(error =>console.log(error));
 }
+
+getWeather()
